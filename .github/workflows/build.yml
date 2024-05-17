@@ -26,20 +26,21 @@ jobs:
     - uses: actions/checkout@v3    # Actually check out the sources. GH Actions can run for events that may not require
                                    # sources (e.g. when someone comments on an issue)
 
-    - name: Export Esri sdk path
-      run: ls
-           # export LD_LIBRARY_PATH=/arcgis/maps_sdk/qt200.4.0/sdk/linux/x64/lib:$LD_LIBRARY_PATH
-    # - name: Install Esri Runtime SDK (Linux)
-    #   run: |
-    #     wget -qO- "https://esrisoftware.esri.com/akdlm/software/ArcGIS_MapsSDK/200.4.0/ArcGIS_Maps_SDK_Qt_Linux64_200_4_0.tar.gz?downloadID=NA&type=NA&agolUsername=NA&receiptId=downloads.arcgis.com&__gdb__=1715907205_0d4951f63e645588fb34bfe561a22c86&ext=.gz" -O sdk.tar.gz
-    #     gunzip sdk.tar.gz
-    #     tar xvf sdk.tar -C /opt
-    #     cd /opt/ArcGIS_Maps_SDK_Qt_Linux64
-    #     ./Setup -s -d /home/runner/work/CI_CD_TEST/CI_CD_TEST
-    #     # cd ..
-    #     # ./arcgis/maps_sdk/qt200.4.0/tools/postInstall.sh
-    #     # ls
-    #     # echo "ArcGISRuntime_INSTALL_DIR=/opt/arcgis" >> $GITHUB_ENV
+    # - name: Export Esri sdk path
+    #   run: ls
+    #        # export LD_LIBRARY_PATH=/arcgis/maps_sdk/qt200.4.0/sdk/linux/x64/lib:$LD_LIBRARY_PATH
+    - name: Install Esri Runtime SDK (Linux)
+      run: |
+        wget -qO- "https://esrisoftware.esri.com/akdlm/software/ArcGIS_MapsSDK/200.4.0/ArcGIS_Maps_SDK_Qt_Linux64_200_4_0.tar.gz?downloadID=NA&type=NA&agolUsername=NA&receiptId=downloads.arcgis.com&__gdb__=1715987738_eb2d255d609b9dfd545375d31c045b48&ext=.gz" -O sdk.tar.gz
+        gunzip sdk.tar.gz
+        tar xvf sdk.tar
+        cd /ArcGIS_Maps_SDK_Qt_Linux64
+        ./Setup -s
+        cd ..
+        ls
+        # ./arcgis/maps_sdk/qt200.4.0/tools/postInstall.sh
+        # ls
+        # echo "ArcGISRuntime_INSTALL_DIR=/opt/arcgis" >> $GITHUB_ENV
     #   if: matrix.os == 'ubuntu-latest'
 
     # - name: Print environment variables (Linux)
