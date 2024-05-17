@@ -33,7 +33,7 @@ function(GET_INSTALL_DIR OUT_VAR DESC_VAR)
   endif()
 
   # If there is an INI path we attempt to extract the install location from it.
-  if(EXISTS ${INI_PATH})
+  if(EXISTS "${INI_PATH}")
     message("Found configuration file at " ${INI_PATH})
     # Finds the `InstallDir="/path/to/arcgis"` string and extracts the path.
     file(STRINGS ${INI_PATH} INSTALL_INI REGEX InstallDir=)
