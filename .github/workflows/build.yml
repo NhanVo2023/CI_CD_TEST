@@ -75,20 +75,20 @@ jobs:
     #       wget -O ${{ runner.temp }}/Qt/6.7.0/gcc_64/qml/YourLibrary/yourlibrary.so "https://example.com/yourlibrary.so"
     #     }
     
-    - name: Configure CMake
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+    # - name: Configure CMake
+    #   # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+    #   # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+    #   run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
-    - name: Build
-      # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+    # - name: Build
+    #   # Build your program with the given configuration
+    #   run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
       
     # Here we call CMake manually, there are solutions for that in the Marketplace: https://github.com/marketplace/actions/run-cmake
-    # - name: Build
-    #   # We don't need to set up the environment variable for CMake to see Qt because the install-qt-action
-    #   # sets up the necessary variables automatically
-    #   run: cmake -S . -B build -G "Ninja Multi-Config" && cmake --build build --config Debug
+    - name: Build
+      # We don't need to set up the environment variable for CMake to see Qt because the install-qt-action
+      # sets up the necessary variables automatically
+      run: cmake -S . -B build -G "Ninja Multi-Config" && cmake --build build --config Debug
 
     # Save the Artifacts
     # - name: Upload Artifacts
