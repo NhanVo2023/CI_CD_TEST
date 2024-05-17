@@ -24,7 +24,7 @@ jobs:
         modules: qtmultimedia qtpositioning qtsensors qtwebsockets qtwebengine qtwebview
     - uses: ilammy/msvc-dev-cmd@v1 # This action essentially calls vcvarsall.bat for the latest VS in the runner for x64
     - uses: actions/checkout@v3    # Actually check out the sources. GH Actions can run for events that may not require
-    #                                # sources (e.g. when someone comments on an issue
+    #                                # sources (e.g. when someone comments on an issues
     # - name: Export Esri sdk path
     #   run: ls
     #        # export LD_LIBRARY_PATH=/arcgis/maps_sdk/qt200.4.0/sdk/linux/x64/lib:$LD_LIBRARY_PATH
