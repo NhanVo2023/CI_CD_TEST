@@ -56,7 +56,7 @@ set(RUNTIME_CMAKE_PATH
 if(EXISTS "${RUNTIME_CMAKE_PATH}")
   include("${RUNTIME_CMAKE_PATH}")
 else()
-  message(FATAL_ERROR "${ArcGISRuntime_INSTALL_DIR} module ${RUNTIME_CMAKE_PATH} does not exist.")
+  message(FATAL_ERROR "-${ArcGISRuntime_INSTALL_DIR}- module ${RUNTIME_CMAKE_PATH} does not exist.")
 endif()
 
 message("</FindArcGISRuntime.cmake>")
