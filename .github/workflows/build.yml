@@ -8,59 +8,60 @@ on:
 jobs:
   build_and_test:
     name: "Build and test"
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest] # we build on GitHub-provided Windows and Linux images
-    runs-on: ${{ matrix.os }} # use value from the matrix
+    # strategy:
+    #   matrix:
+    #     os: [ubuntu-latest, windows-latest] # we build on GitHub-provided Windows and Linux images
+    # runs-on: ${{ matrix.os }} # use value from the matrix
+    runs-on: self-hosted
     steps:
-    - name: Install dependencies (linux)
-      run: sudo apt install ninja-build
-      if: matrix.os == 'ubuntu-latest' # conditional, runs this step only on the Ubuntu runner
+    # - name: Install dependencies (linux)
+    #   run: sudo apt install ninja-build
+    #   if: matrix.os == 'ubuntu-latest' # conditional, runs this step only on the Ubuntu runner
 
       # Windows installer
-    - name: Install Ninja (windows)    # Ninja is not available in GitHub-provided images,
+      # - name: Install Ninja (windows)    # Ninja is not available in GitHub-provided images,
                                        # see https://github.com/actions/runner-images/issues/514
-      run: choco install ninja         # So let's install it through Chocolatey
-      if: matrix.os == 'windows-latest'
+      # run: choco install ninja         # So let's install it through Chocolatey
+      # if: matrix.os == 'windows-latest'
       
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v3
-      with:
-        version: '6.7.0'
-        modules: qtmultimedia qtpositioning qtsensors qtwebsockets qtwebengine qtwebview
-    - uses: ilammy/msvc-dev-cmd@v1 # This action essentially calls vcvarsall.bat for the latest VS in the runner for x64
-    - uses: actions/checkout@v3    # Actually check out the sources. GH Actions can run for events that may not require
-                                   # sources (e.g. when someone comments on an issue)
-    - name: Install Esri Runtime SDK (Linux)
-      run: |
-        wget -qO- "https://esrisoftware.esri.com/akdlm/software/ArcGIS_MapsSDK/200.4.0/ArcGIS_Maps_SDK_Qt_Linux64_200_4_0.tar.gz?downloadID=NA&type=NA&agolUsername=NA&receiptId=downloads.arcgis.com&__gdb__=1715907205_0d4951f63e645588fb34bfe561a22c86&ext=.gz" -O sdk.tar.gz
-        gunzip sdk.tar.gz
-        tar xvf sdk.tar -C /opt
-        cd /opt/ArcGIS_Maps_SDK_Qt_Linux64
-        ./Setup -s -d /home/runner/work/CI_CD_TEST/CI_CD_TEST
-        # cd ..
-        # ./arcgis/maps_sdk/qt200.4.0/tools/postInstall.sh
-        # ls
-        # echo "ArcGISRuntime_INSTALL_DIR=/opt/arcgis" >> $GITHUB_ENV
-      if: matrix.os == 'ubuntu-latest'
+    # - name: Install Qt
+    #   uses: jurplel/install-qt-action@v3
+    #   with:
+    #     version: '6.7.0'
+    #     modules: qtmultimedia qtpositioning qtsensors qtwebsockets qtwebengine qtwebview
+    # - uses: ilammy/msvc-dev-cmd@v1 # This action essentially calls vcvarsall.bat for the latest VS in the runner for x64
+    # - uses: actions/checkout@v3    # Actually check out the sources. GH Actions can run for events that may not require
+    #                                # sources (e.g. when someone comments on an issue)
+    # - name: Install Esri Runtime SDK (Linux)
+    #   run: |
+    #     wget -qO- "https://esrisoftware.esri.com/akdlm/software/ArcGIS_MapsSDK/200.4.0/ArcGIS_Maps_SDK_Qt_Linux64_200_4_0.tar.gz?downloadID=NA&type=NA&agolUsername=NA&receiptId=downloads.arcgis.com&__gdb__=1715907205_0d4951f63e645588fb34bfe561a22c86&ext=.gz" -O sdk.tar.gz
+    #     gunzip sdk.tar.gz
+    #     tar xvf sdk.tar -C /opt
+    #     cd /opt/ArcGIS_Maps_SDK_Qt_Linux64
+    #     ./Setup -s -d /home/runner/work/CI_CD_TEST/CI_CD_TEST
+    #     # cd ..
+    #     # ./arcgis/maps_sdk/qt200.4.0/tools/postInstall.sh
+    #     # ls
+    #     # echo "ArcGISRuntime_INSTALL_DIR=/opt/arcgis" >> $GITHUB_ENV
+    #   if: matrix.os == 'ubuntu-latest'
 
-    - name: Print environment variables (Linux)
-      if: matrix.os == 'ubuntu-latest'
-      run: printenv
-      shell: bash
+    # - name: Print environment variables (Linux)
+    #   if: matrix.os == 'ubuntu-latest'
+    #   run: printenv
+    #   shell: bash
 
-    - name: List directories (Linux)
-      if: matrix.os == 'ubuntu-latest'
-      run: ls -l /opt
-      shell: bash
+    # - name: List directories (Linux)
+    #   if: matrix.os == 'ubuntu-latest'
+    #   run: ls -l /opt
+    #   shell: bash
 
 
-    - name: Install Esri Runtime SDK (Windows)
-      run: |
-        Invoke-WebRequest -Uri "https://esrisoftware.esri.com/akdlm/software/ArcGIS_MapsSDK/200.4.0/ArcGIS_Maps_SDK_Qt_Windows_200_4_0.exe?downloadID=NA&type=NA&agolUsername=NA&receiptId=downloads.arcgis.com&__gdb__=1715907236_84ce7a4e6a72ffce2d4a1158ad811922&ext=.exe" -OutFile "Esri_Runtime_SDK.exe"
-        Start-Process -FilePath "Esri_Runtime_SDK.exe" -ArgumentList '/S', '/NCRC' -NoNewWindow -Wait
-        echo "ESRI_SDK_PATH=C:\Esri" | Out-File -Append -Encoding ASCII $env:GITHUB_ENV
-      if: matrix.os == 'windows-latest'
+    # - name: Install Esri Runtime SDK (Windows)
+    #   run: |
+    #     Invoke-WebRequest -Uri "https://esrisoftware.esri.com/akdlm/software/ArcGIS_MapsSDK/200.4.0/ArcGIS_Maps_SDK_Qt_Windows_200_4_0.exe?downloadID=NA&type=NA&agolUsername=NA&receiptId=downloads.arcgis.com&__gdb__=1715907236_84ce7a4e6a72ffce2d4a1158ad811922&ext=.exe" -OutFile "Esri_Runtime_SDK.exe"
+    #     Start-Process -FilePath "Esri_Runtime_SDK.exe" -ArgumentList '/S', '/NCRC' -NoNewWindow -Wait
+    #     echo "ESRI_SDK_PATH=C:\Esri" | Out-File -Append -Encoding ASCII $env:GITHUB_ENV
+    #   if: matrix.os == 'windows-latest'
 
      
       
