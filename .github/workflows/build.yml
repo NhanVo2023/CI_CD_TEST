@@ -14,35 +14,35 @@ jobs:
     # runs-on: ${{ matrix.os }} # use value from the matrix
     runs-on: self-hosted
     steps:
-    - name: Install dependencies (linux)
-      run: sudo apt install ninja-build
+    # - name: Install dependencies (linux)
+    #   run: sudo apt install ninja-build
       
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v3
-      with:
-        version: '6.7.0'
-        modules: qtmultimedia qtpositioning qtsensors qtwebsockets qtwebengine qtwebview
-    - uses: ilammy/msvc-dev-cmd@v1 # This action essentially calls vcvarsall.bat for the latest VS in the runner for x64
-    - uses: actions/checkout@v3    # Actually check out the sources. GH Actions can run for events that may not require
-                                   # sources (e.g. when someone comments on an issue)
+    # - name: Install Qt
+    #   uses: jurplel/install-qt-action@v3
+    #   with:
+    #     version: '6.7.0'
+    #     modules: qtmultimedia qtpositioning qtsensors qtwebsockets qtwebengine qtwebview
+    # - uses: ilammy/msvc-dev-cmd@v1 # This action essentially calls vcvarsall.bat for the latest VS in the runner for x64
+    # - uses: actions/checkout@v3    # Actually check out the sources. GH Actions can run for events that may not require
+    #                                # sources (e.g. when someone comments on an issue)
 
     # - name: Export Esri sdk path
     #   run: ls
     #        # export LD_LIBRARY_PATH=/arcgis/maps_sdk/qt200.4.0/sdk/linux/x64/lib:$LD_LIBRARY_PATH
-    - name: Export Esri sdk path (Linux)
-      run: |
-        # wget -qO- "https://esrisoftware.esri.com/akdlm/software/ArcGIS_MapsSDK/200.4.0/ArcGIS_Maps_SDK_Qt_Linux64_200_4_0.tar.gz?downloadID=NA&type=NA&agolUsername=NA&receiptId=downloads.arcgis.com&__gdb__=1715987738_eb2d255d609b9dfd545375d31c045b48&ext=.gz" -O sdk.tar.gz
-        # gunzip sdk.tar.gz
-        # tar xvf sdk.tar
-        # ls
-        # cd ArcGIS_Maps_SDK_Qt_Linux64/
-        # ./Setup -s
-        # cd ..
-        # ls
-        # ./arcgis/maps_sdk/qt200.4.0/tools/postInstall.sh
-        # ls
-        export LD_LIBRARY_PATH=/home/efas7/arcgis/maps_sdk/qt200.4.0/sdk/linux/<platform>/lib:$LD_LIBRARY_PATH
-        echo "LD_LIBRARY_PATH=/home/efas7/arcgis/maps_sdk/qt200.4.0/sdk/linux/<platform>/lib" >> $GITHUB_ENV
+    # - name: Export Esri sdk path (Linux)
+    #   run: |
+    #     # wget -qO- "https://esrisoftware.esri.com/akdlm/software/ArcGIS_MapsSDK/200.4.0/ArcGIS_Maps_SDK_Qt_Linux64_200_4_0.tar.gz?downloadID=NA&type=NA&agolUsername=NA&receiptId=downloads.arcgis.com&__gdb__=1715987738_eb2d255d609b9dfd545375d31c045b48&ext=.gz" -O sdk.tar.gz
+    #     # gunzip sdk.tar.gz
+    #     # tar xvf sdk.tar
+    #     # ls
+    #     # cd ArcGIS_Maps_SDK_Qt_Linux64/
+    #     # ./Setup -s
+    #     # cd ..
+    #     # ls
+    #     # ./arcgis/maps_sdk/qt200.4.0/tools/postInstall.sh
+    #     # ls
+    #     export LD_LIBRARY_PATH=/home/efas7/arcgis/maps_sdk/qt200.4.0/sdk/linux/<platform>/lib:$LD_LIBRARY_PATH
+    #     echo "LD_LIBRARY_PATH=/home/efas7/arcgis/maps_sdk/qt200.4.0/sdk/linux/<platform>/lib" >> $GITHUB_ENV
     #   if: matrix.os == 'ubuntu-latest'
 
     # - name: Print environment variables (Linux)
