@@ -44,7 +44,10 @@ function(GET_INSTALL_DIR OUT_VAR DESC_VAR)
     else()
       message("Missing ArcGIS Runtime install location in configuration file.")
     endif()
+  else()
+      message(${INI_PATH} "Missing ArcGIS Runtime install location in configuration file.")
   endif()
+
 endfunction()
 
 message("<FindArcGISRuntime.cmake>")
