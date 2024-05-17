@@ -16,13 +16,6 @@ jobs:
     steps:
     - name: Install dependencies (linux)
       run: sudo apt install ninja-build
-    #   if: matrix.os == 'ubuntu-latest' # conditional, runs this step only on the Ubuntu runner
-
-      # Windows installer
-      # - name: Install Ninja (windows)    # Ninja is not available in GitHub-provided images,
-                                       # see https://github.com/actions/runner-images/issues/514
-      # run: choco install ninja         # So let's install it through Chocolatey
-      # if: matrix.os == 'windows-latest'
       
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
