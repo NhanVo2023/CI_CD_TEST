@@ -51,7 +51,7 @@ See "ArcGISRuntime.cmake" for additional information.
 # get_install_dir(ArcGISRuntime_INSTALL_DIR "Install directory of ArcGISRuntime")
 
 set(RUNTIME_CMAKE_PATH
-  "${ArcGISRuntime_INSTALL_DIR}/sdk/ideintegration/ArcGISRuntime.cmake")
+  "$ENV{ArcGISRuntime_INSTALL_DIR}/sdk/ideintegration/ArcGISRuntime.cmake")
 
 if(EXISTS "${RUNTIME_CMAKE_PATH}")
   include("${RUNTIME_CMAKE_PATH}")
