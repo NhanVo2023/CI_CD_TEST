@@ -24,31 +24,31 @@ See "ArcGISRuntime.cmake" for additional information.
 
 function(GET_INSTALL_DIR OUT_VAR DESC_VAR)
   # Discover the INI file with an install location (if it exists).
-  set(VER_MAJ_MIN ${ArcGISRuntime_FIND_VERSION_MAJOR}.${ArcGISRuntime_FIND_VERSION_MINOR}.${ArcGISRuntime_FIND_VERSION_PATCH} CACHE STRING "Major Minor version ArcGISRuntime" FORCE)
+  set(VER_MAJ_MIN "${ArcGISRuntime_FIND_VERSION_MAJOR}.${ArcGISRuntime_FIND_VERSION_MINOR}.${ArcGISRuntime_FIND_VERSION_PATCH}" CACHE STRING "Major Minor version ArcGISRuntime" FORCE)
   if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL Windows)
-    set(INI_PATH $ENV{ALLUSERSPROFILE}/EsriRuntimeQt/ArcGIS\ Runtime\ SDK\ for\ Qt\ ${VER_MAJ_MIN}.ini)
+    set(INI_PATH "$ENV{ALLUSERSPROFILE}/EsriRuntimeQt/ArcGIS Runtime SDK for Qt ${VER_MAJ_MIN}.ini")
   else()
-    set(INI_PATH $ENV{HOME}/.config/EsriRuntimeQt/ArcGIS\ Runtime\ SDK\ for\ Qt\ ${VER_MAJ_MIN}.ini)
-    message (${INI_PATH})
+    set(INI_PATH "$ENV{HOME}/.config/EsriRuntimeQt/ArcGIS Runtime SDK for Qt ${VER_MAJ_MIN}.ini")
+    message(STATUS "INI_PATH: ${INI_PATH}")
   endif()
 
   # If there is an INI path we attempt to extract the install location from it.
   if(EXISTS "${INI_PATH}")
-    message("Found configuration file at " ${INI_PATH})
+    message(STATUS "Found configuration file at ${INI_PATH}")
     # Finds the `InstallDir="/path/to/arcgis"` string and extracts the path.
-    file(STRINGS ${INI_PATH} INSTALL_INI REGEX InstallDir=)
-    string(REGEX REPLACE "^InstallDir=\"(.*)\"$" "\\1" INSTALL_DIR ${INSTALL_INI}) # "
+    file(STRINGS "${INI_PATH}" INSTALL_INI REGEX "InstallDir=")
+    string(REGEX REPLACE "^InstallDir=\"(.*)\"$" "\\1" INSTALL_DIR "${INSTALL_INI}") # "
     if(INSTALL_DIR)
-      message("Found ArcGISRuntime installation at ${INSTALL_DIR}")
-      set(${OUT_VAR} "${INSTALL_DIR}" CACHE STRING ${DESC_VAR})
+      message(STATUS "Found ArcGISRuntime installation at ${INSTALL_DIR}")
+      set(${OUT_VAR} "${INSTALL_DIR}" CACHE STRING "${DESC_VAR}")
     else()
-      message("Missing ArcGIS Runtime install location in configuration file.")
+      message(WARNING "Missing ArcGIS Runtime install location in configuration file.")
     endif()
   else()
-      message(${INI_PATH} "Missing ArcGIS Runtime install location in configuration file.")
+    message(WARNING "Configuration file does not exist at ${INI_PATH}")
   endif()
-
 endfunction()
+
 
 message("<FindArcGISRuntime.cmake>")
 
