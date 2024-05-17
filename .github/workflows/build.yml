@@ -28,7 +28,7 @@ jobs:
 
     - name: Export Esri sdk path
       run: ls
-           export LD_LIBRARY_PATH=/arcgis/maps_sdk/qt200.4.0/sdk/linux/x64/lib:$LD_LIBRARY_PATH
+           # export LD_LIBRARY_PATH=/arcgis/maps_sdk/qt200.4.0/sdk/linux/x64/lib:$LD_LIBRARY_PATH
     # - name: Install Esri Runtime SDK (Linux)
     #   run: |
     #     wget -qO- "https://esrisoftware.esri.com/akdlm/software/ArcGIS_MapsSDK/200.4.0/ArcGIS_Maps_SDK_Qt_Linux64_200_4_0.tar.gz?downloadID=NA&type=NA&agolUsername=NA&receiptId=downloads.arcgis.com&__gdb__=1715907205_0d4951f63e645588fb34bfe561a22c86&ext=.gz" -O sdk.tar.gz
