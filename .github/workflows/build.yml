@@ -24,7 +24,6 @@ jobs:
         version: '6.7.0'
         host: windows
         target: desktop
-        setup-python: false
         modules: qtmultimedia qtpositioning qtsensors qtwebsockets qtwebengine qtwebview
     - uses: ilammy/msvc-dev-cmd@v1 # This action essentially calls vcvarsall.bat for the latest VS in the runner for x64
     - uses: actions/checkout@v3    # Actually check out the sources. GH Actions can run for events that may not require
