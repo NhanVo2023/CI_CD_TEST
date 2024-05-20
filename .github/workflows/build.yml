@@ -17,7 +17,6 @@ jobs:
     steps:
     # - name: Install dependencies (linux)
     #   run: sudo apt install ninja-build
-      
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
