@@ -17,14 +17,14 @@ jobs:
     # - name: Install dependencies (linux)
     #   run: sudo apt install ninja-build
       
-    # - name: Install Qt
-    #   uses: jurplel/install-qt-action@v3
-    #   with:
-    #     version: '6.7.0'
-    #     modules: qtmultimedia qtpositioning qtsensors qtwebsockets qtwebengine qtwebview
-    # - uses: ilammy/msvc-dev-cmd@v1 # This action essentially calls vcvarsall.bat for the latest VS in the runner for x64
-    # - uses: actions/checkout@v3    # Actually check out the sources. GH Actions can run for events that may not require
-    #                                # sources (e.g. when someone comments on an issues
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: '6.7.0'
+        modules: qtmultimedia qtpositioning qtsensors qtwebsockets qtwebengine qtwebview
+    - uses: ilammy/msvc-dev-cmd@v1 # This action essentially calls vcvarsall.bat for the latest VS in the runner for x64
+    - uses: actions/checkout@v3    # Actually check out the sources. GH Actions can run for events that may not require
+                                   # sources (e.g. when someone comments on an issues
     # - name: Export Esri sdk path
     #   run: ls
     #        # export LD_LIBRARY_PATH=/arcgis/maps_sdk/qt200.4.0/sdk/linux/x64/lib:$LD_LIBRARY_PATH
@@ -61,7 +61,6 @@ jobs:
     #     Start-Process -FilePath "Esri_Runtime_SDK.exe" -ArgumentList '/S', '/NCRC' -NoNewWindow -Wait
     #     echo "ESRI_SDK_PATH=C:\Esri" | Out-File -Append -Encoding ASCII $env:GITHUB_ENV
     #   if: matrix.os == 'windows-latest'
-
      
       
     # Download and put the FluentUI to the compiler 
@@ -85,9 +84,9 @@ jobs:
     #   run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
     
-    - name: Install Ninja (windows)    # Ninja is not available in GitHub-provided images,
-                                       # see https://github.com/actions/runner-images/issues/514
-      run: choco install ninja         # So let's install it through Chocolatey
+    # - name: Install Ninja (windows)    # Ninja is not available in GitHub-provided images,
+    #                                    # see https://github.com/actions/runner-images/issues/514
+    #   run: choco install ninja         # So let's install it through Chocolatey
       
     # Here we call CMake manually, there are solutions for that in the Marketplace: https://github.com/marketplace/actions/run-cmake
     - name: Build
